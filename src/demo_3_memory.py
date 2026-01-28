@@ -26,7 +26,6 @@ def run_memory_demo():
         "input": "My name is Alice and I love Python programming."
     })
     chat_history.extend([
-        # HumanMessage(content="My name is Alice and I love Python programming."),
         AIMessage(content=response1.content)
     ])
     

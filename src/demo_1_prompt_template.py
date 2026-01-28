@@ -30,7 +30,7 @@ def run_prompt_template_demo():
         )
         print("Using OpenAI")
     
-    # Create chain
+    # Create chain using LCEL (LangChain Execution Language)
     chain = prompt | model | StrOutputParser()
     
     # Invoke

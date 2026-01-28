@@ -30,8 +30,23 @@ def run_tools_demo():
         ("placeholder", "{agent_scratchpad}"),
     ])
     
-    agent = create_tool_calling_agent(llm, tools, prompt)
-    executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    agent = create_tool_calling_agent(llm, tools, prompt) # Agent: The brain - decides which tools to call
+    executor = AgentExecutor(agent=agent, tools=tools, verbose=True) # AgentExecutor is the runtime engine that runs your agent. Think of it as the orchestrator that manages the entire agent loop.
+
+    """
+    # What AgentExecutor does internally (very simplified pseudo-code):
+    def agent_executor_loop(input):
+        next_action = agent.get_action(input)
+    
+        while not is_finished(next_action):
+            # Execute the tool
+            observation = run_tool(next_action)
+        
+            # Agent sees result and decides next step
+            next_action = agent.get_action(input, next_action, observation)
+    
+        return next_action.final_answer
+    """
     
     print("=== Tool Calling Demo ===")
     result = executor.invoke(
